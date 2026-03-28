@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Seven9 Developers | Built with Intention</title>
+<!-- Fonts: Inter for Body, Playfair Display for Serifs -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              terracotta: '#c0785d',
+              olive: '#707a5d',
+              sand: '#f4f1ea',
+              warmWhite: '#faf9f6',
+              brown: '#4a3f35',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          borderRadius: {
+            'custom': '8px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-typography">
+    body {
+      color: #4a3f35; /* Using brand brown instead of black */
+      background-color: #faf9f6;
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, .serif-text {
+      font-family: 'Playfair Display', serif;
+    }
+    .slow-spacing {
+      letter-spacing: 0.05em;
+    }
+    .transition-gentle {
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+<style data-purpose="layout-utilities">
+    .hero-overlay {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
+    }
+    .project-reveal:hover img {
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+<!-- BEGIN: Navigation -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-6 md:px-16 transition-all duration-300" data-purpose="main-nav">
+<div class="text-2xl font-serif font-semibold tracking-tighter text-white">Seven9Developers</div>
+<div class="hidden md:flex space-x-12 text-sm uppercase tracking-widest text-white/90">
+<a class="hover:text-white transition-colors" href="#">Philosophy</a>
+<a class="hover:text-white transition-colors" href="#">Projects</a>
+<a class="hover:text-white transition-colors" href="#">Experience</a>
+<a class="hover:text-white transition-colors" href="#">Contact</a>
+</div>
+<div class="md:hidden text-white">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</nav>
+<!-- END: Navigation -->
+<!-- BEGIN: Hero Section -->
+<section class="relative h-screen w-full flex items-center justify-center overflow-hidden" data-purpose="hero">
+<!-- Hero Video -->
+<video class="absolute inset-0 w-full h-full object-cover" src="Palladium_Highstreet_realestate_palladiuminnovations_home_architecture_palladium_luxury_1080P.mp4" autoplay loop muted playsinline></video>
+<div class="absolute inset-0 hero-overlay"></div>
+<div class="relative z-10 text-center px-4 max-w-4xl">
+<h1 class="text-4xl md:text-7xl text-white font-serif mb-8 leading-tight">Built with intention.<br/><span class="italic">Designed for a slower, better life.</span></h1>
+<div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+<a class="px-10 py-4 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-custom uppercase tracking-widest text-xs font-medium shadow-lg hover:bg-white/20 hover:border-white/50 transition-gentle" href="#" style="box-shadow:0 4px 24px 0 rgba(0,0,0,0.12);">Explore Projects</a>
+<a class="px-10 py-4 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-custom uppercase tracking-widest text-xs font-medium shadow-lg hover:bg-white/20 hover:border-white/50 transition-gentle" href="#" style="box-shadow:0 4px 24px 0 rgba(0,0,0,0.12);">Book Visit</a>
+</div>
+</div>
+</section>
+<!-- END: Hero Section -->
+<main>
+<!-- BEGIN: Philosophy Section -->
+<section class="py-24 md:py-40 bg-brand-warmWhite px-8 md:px-24" data-purpose="philosophy">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="order-2 md:order-1">
+<img alt="Architectural Detail" class="w-full aspect-[4/5] object-cover rounded-sm shadow-sm" src="Cam03-scaled.webp"/>
+</div>
+<div class="order-1 md:order-2 md:pl-12">
+<p class="uppercase tracking-[0.3em] text-xs text-brand-olive mb-8">Our Essence</p>
+<h2 class="text-3xl md:text-5xl font-serif leading-snug mb-8">We don’t construct spaces. We shape environments that feel grounded, open, and alive.</h2>
+<p class="text-brand-brown/70 leading-relaxed max-w-md">Our philosophy is simple: architecture should be a silent partner to your daily rituals, enhancing the natural light and the quiet moments between.</p>
+</div>
+</div>
+</section>
+<!-- END: Philosophy Section -->
+<!-- BEGIN: Project Showcase Section -->
+<section class="bg-brand-warmWhite" data-purpose="project-showcase">
+<!-- Ongoing Projects -->
+<article class="group relative overflow-hidden h-[80vh] cursor-pointer project-reveal" data-purpose="project-item">
+<img alt="Palladium Highstreet" class="w-full h-full object-cover transition-gentle duration-1000" src="Cam04-entrance-zoom-scaled.webp"/>
+<div class="absolute inset-0 bg-brand-brown/10 group-hover:bg-brand-brown/20 transition-gentle"></div>
+<div class="absolute bottom-12 left-8 md:left-24 text-white">
+<h3 class="text-4xl md:text-6xl font-serif mb-2">Palladium Highstreet</h3>
+<p class="text-sm uppercase tracking-widest opacity-90">ResiCommercial Building | 3BHK/4BHK | 16875 sq.m | Ring Road, Silvassa</p>
+</div>
+</article>
+<article class="group relative overflow-hidden h-[80vh] cursor-pointer project-reveal" data-purpose="project-item">
+<img alt="Grandeur Bungalow" class="w-full h-full object-cover transition-gentle duration-1000" src="Cam09-1-scaled.webp"/>
+<div class="absolute inset-0 bg-brand-brown/10 group-hover:bg-brand-brown/20 transition-gentle"></div>
+<div class="absolute bottom-12 left-8 md:left-24 text-white">
+<h3 class="text-4xl md:text-6xl font-serif mb-2">Grandeur Bungalow</h3>
+<p class="text-sm uppercase tracking-widest opacity-90">Residences/Villas | 4BHK/5BHK | 4347 sq.m | Ultan Faliya Ring Road, Silvassa</p>
+</div>
+</article>
+<!-- Completed Projects -->
+</section>
+<!-- END: Project Showcase Section -->
+<!-- BEGIN: Lifestyle Grid Section -->
+<section class="py-24 md:py-40 bg-brand-warmWhite px-8 md:px-24" data-purpose="lifestyle">
+<div class="max-w-7xl mx-auto">
+<div class="mb-20 text-center">
+<h2 class="text-3xl md:text-5xl font-serif mb-4">Spaces that breathe with you.</h2>
+<p class="text-brand-brown/60 uppercase tracking-widest text-xs">Four pillars of quiet living</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Morning -->
+<div class="flex flex-col gap-6 lg:mt-0" data-purpose="lifestyle-item">
+  <img alt="Morning ritual" class="aspect-[3/4] object-cover rounded-sm grayscale hover:grayscale-0 transition-gentle" src="79_mrg.webp"/>
+  <div>
+    <h4 class="font-serif text-xl mb-1">Morning</h4>
+    <p class="text-xs text-brand-brown/60 tracking-wide">Soft light for first rituals.</p>
+  </div>
+</div>
+<!-- Wellness -->
+<div class="flex flex-col gap-6 lg:mt-12" data-purpose="lifestyle-item">
+  <img alt="Wellness space" class="aspect-[3/4] object-cover rounded-sm grayscale hover:grayscale-0 transition-gentle" src="79_wellness.webp"/>
+  <div>
+    <h4 class="font-serif text-xl mb-1">Wellness</h4>
+    <p class="text-xs text-brand-brown/60 tracking-wide">Quietude for the soul.</p>
+  </div>
+</div>
+<!-- Social -->
+<div class="flex flex-col gap-6 lg:mt-0" data-purpose="lifestyle-item">
+  <img alt="Social gathering" class="aspect-[3/4] object-cover rounded-sm grayscale hover:grayscale-0 transition-gentle" src="79_social.webp"/>
+  <div>
+    <h4 class="font-serif text-xl mb-1">Social</h4>
+    <p class="text-xs text-brand-brown/60 tracking-wide">Intentional connection.</p>
+  </div>
+</div>
+<!-- Privacy -->
+<div class="flex flex-col gap-6 lg:mt-12" data-purpose="lifestyle-item">
+  <img alt="Private sanctuary" class="aspect-[3/4] object-cover rounded-sm grayscale hover:grayscale-0 transition-gentle" src="79_privacacy.webp"/>
+  <div>
+    <h4 class="font-serif text-xl mb-1">Privacy</h4>
+    <p class="text-xs text-brand-brown/60 tracking-wide">A sanctuary of your own.</p>
+  </div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Lifestyle Grid Section -->
+<!-- BEGIN: Materials Section -->
+<section class="py-24 md:py-40 bg-[#eeece6]" data-purpose="materials">
+<div class="max-w-5xl mx-auto px-8 flex flex-col items-center text-center">
+<div class="flex gap-4 mb-12">
+<div class="w-24 h-32 bg-white shadow-sm overflow-hidden">
+<img alt="White Stone" class="w-full h-full object-cover opacity-80" src="Cam09-1-scaled.webp"/>
+</div>
+<div class="w-24 h-32 bg-white shadow-sm overflow-hidden mt-8">
+<img alt="Natural Oak" class="w-full h-full object-cover opacity-80" src="Palladium-Highstreet-Club_Cam-v01-scaled.webp"/>
+</div>
+<div class="w-24 h-32 bg-white shadow-sm overflow-hidden">
+<img alt="Light and Shadow" class="w-full h-full object-cover opacity-80" src="Cam01-scaled.webp"/>
+</div>
+</div>
+<h2 class="text-3xl font-serif mb-6 italic">Crafted with materials that age beautifully.</h2>
+<p class="text-brand-brown/60 max-w-lg leading-relaxed">We source ethically, prioritizing stone, timber, and lime plaster—elements that gather character with time and weather.</p>
+</div>
+</section>
+<!-- END: Materials Section -->
+<!-- BEGIN: Call to Action Section -->
+<section class="py-24 md:py-40 bg-brand-sand text-center px-8" data-purpose="cta">
+<h2 class="text-4xl md:text-6xl font-serif mb-12">Come experience it in person.</h2>
+<div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+<a class="w-full md:w-auto px-12 py-5 bg-brand-terracotta text-white rounded-custom uppercase tracking-widest text-xs font-medium hover:bg-[#a6654e] transition-gentle shadow-md" href="#">Book Visit</a>
+<a class="w-full md:w-auto px-12 py-5 border border-brand-brown/20 text-brand-brown rounded-custom uppercase tracking-widest text-xs font-medium hover:bg-brand-brown/5 transition-gentle" href="#">Contact</a>
+</div>
+</section>
+<!-- END: Call to Action Section -->
+</main>
+<!-- BEGIN: Footer -->
+<footer class="bg-brand-warmWhite py-20 px-8 md:px-24 border-t border-brand-brown/5" data-purpose="footer">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+  <!-- About/Brand -->
+  <div class="flex flex-col gap-4">
+    <div class="text-xl md:text-2xl font-serif font-bold tracking-tight text-brand-brown mb-2">SEVEN9 DEVCON LLP</div>
+    <div class="text-brand-brown/70 text-sm leading-relaxed">A distinguished Real Estate firm with over a decade of experience dedicated to transforming the Silvassa region through innovative and sustainable building practices.</div>
+    <div class="mt-4">
+      <div class="font-semibold text-brand-brown/80 text-xs mb-1">Company Stats</div>
+      <ul class="text-brand-brown/60 text-xs space-y-1">
+        <li><span class="font-bold">20+</span> Teammates</li>
+        <li><span class="font-bold">400+</span> Happy Customers</li>
+        <li><span class="font-bold">3 Lakh+ sq.ft</span> Ongoing Construction</li>
+        <li><span class="font-bold">7k sq.ft</span> Delivered</li>
+      </ul>
+    </div>
+  </div>
+  <!-- Contact & Social -->
+  <div class="flex flex-col items-center gap-4">
+    <div class="font-semibold text-brand-brown/80 text-xs mb-1">Contact</div>
+    <a href="tel:+917779002147" class="text-brand-brown/90 text-base font-bold hover:text-brand-terracotta underline">+91 77790 02147</a>
+    <div class="font-semibold text-brand-brown/80 text-xs mt-4 mb-1">Connect with us</div>
+    <div class="flex gap-4">
+      <a href="https://www.facebook.com/share/19bR8TmrtD/" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-brand-terracotta text-brand-brown/70">Facebook</a>
+      <a href="https://www.instagram.com/seven9_developers/" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-brand-terracotta text-brand-brown/70">Instagram</a>
+      <a href="http://www.youtube.com/@Seven9_Developers" target="_blank" rel="noopener" aria-label="YouTube" class="hover:text-brand-terracotta text-brand-brown/70">YouTube</a>
+    </div>
+  </div>
+  <!-- Legal/Links -->
+  <div class="flex flex-col items-end gap-4 md:pl-24 md:ml-auto">
+    <div class="font-semibold text-brand-brown/80 text-xs mb-1 text-right w-full">Quick Links</div>
+    <div class="flex flex-col gap-2 text-[12px] text-brand-brown/60 text-right w-full">
+      <a class="hover:text-brand-terracotta" href="https://seven9developers.in/projects/">Projects</a>
+      <a class="hover:text-brand-terracotta" href="https://seven9developers.in/about-us/">About Us</a>
+      <a class="hover:text-brand-terracotta" href="https://seven9developers.in/updates/">Updates</a>
+      <a class="hover:text-brand-terracotta" href="https://seven9developers.in/careers/">Careers</a>
+      <a class="hover:text-brand-terracotta" href="https://seven9developers.in/privacy-policy/">Privacy Policy</a>
+      <a class="hover:text-brand-terracotta" href="https://seven9developers.in/terms-conditions/">Terms & Conditions</a>
+      <a class="hover:text-brand-terracotta" href="https://seven9developers.in/contact-us/">Contact Us</a>
+    </div>
+  </div>
+</div>
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 pt-6">
+  <div class="text-[11px] uppercase tracking-widest text-brand-brown/40 text-center md:text-left">© 2026 Seven9Developers. All Rights Reserved.</div>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+<script data-purpose="nav-interaction">
+    // Subtle navbar color change on scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('bg-brand-warmWhite', 'shadow-sm');
+        nav.querySelectorAll('.text-white').forEach(el => el.classList.replace('text-white', 'text-brand-brown'));
+        nav.querySelectorAll('.text-white\\/90').forEach(el => el.classList.replace('text-white/90', 'text-brand-brown/80'));
+      } else {
+        nav.classList.remove('bg-brand-warmWhite', 'shadow-sm');
+        nav.querySelectorAll('.text-brand-brown').forEach(el => el.classList.replace('text-brand-brown', 'text-white'));
+        nav.querySelectorAll('.text-brand-brown\\/80').forEach(el => el.classList.replace('text-brand-brown/80', 'text-white/90'));
+      }
+    });
+  </script>
+</body></html>
