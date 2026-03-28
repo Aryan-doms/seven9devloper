@@ -13,6 +13,8 @@ export default function Footer() {
           <div className="mt-2">
             <div className="font-medium text-brand-primary text-xs uppercase tracking-widest mb-4">Firm Milestones</div>
             <ul className="text-brand-secondary text-sm space-y-2 font-light">
+              <li><span className="font-medium text-brand-primary">4+</span> Years Young</li>
+              <li><span className="font-medium text-brand-primary">5+</span> Industry Awards</li>
               <li><span className="font-medium text-brand-primary">20+</span> Teammates</li>
               <li><span className="font-medium text-brand-primary">400+</span> Customers</li>
               <li><span className="font-medium text-brand-primary">3 Lakh+ sq.ft</span> Ongoing</li>

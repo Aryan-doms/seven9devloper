@@ -2,7 +2,7 @@ import Hero from '@/components/Hero'
 import Philosophy from '@/components/Philosophy'
 import ProjectsShowcase from '@/components/ProjectsShowcase'
 import Lifestyle from '@/components/Lifestyle'
-import Materials from '@/components/Materials'
+import Metrics from '@/components/Metrics'
 import CallToAction from '@/components/CallToAction'
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
       <Philosophy />
       <ProjectsShowcase />
       <Lifestyle />
-      <Materials />
+      <Metrics />
       <CallToAction />
     </main>
   )

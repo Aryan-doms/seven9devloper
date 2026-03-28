@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 export default function CallToAction() {
   return (
-    <section className="py-32 text-center px-8 flex flex-col items-center justify-center min-h-[60vh]">
+    <section className="py-32 text-center px-8 flex flex-col items-center justify-center min-h-[60vh] bg-brand-sand border-y border-brand-primary/10">
       <motion.p 
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
