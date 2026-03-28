@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       <video
-        src="/Palladium_Highstreet_realestate_palladiuminnovations_home_architecture_palladium_luxury_1080P.mp4"
+        src="https://res.cloudinary.com/dg7x2vzqx/video/upload/v1774694401/Palladium_Highstreet_Realestate_Palladiuminnovations_Home_Architecture_Palladium_Luxury_1080P_fj8rrx.mp4"
         autoPlay
         loop
         muted
