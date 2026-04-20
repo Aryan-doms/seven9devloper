@@ -1,16 +1,18 @@
 'use client'
 import { motion } from 'framer-motion'
 
-export default function Hero() {
+export default function Hero({ data }) {
+  const { video, eyebrow, heading, italic, scroll } = data;
+
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       <video
-        src="https://res.cloudinary.com/dg7x2vzqx/video/upload/v1774694401/Palladium_Highstreet_Realestate_Palladiuminnovations_Home_Architecture_Palladium_Luxury_1080P_fj8rrx.mp4"
+        src={video}
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover object-center  "
+        className="absolute inset-0 w-full h-full object-cover object-center"
       />
       {/* Darkening overlay so the light text pops against the sun and silhouettes */}
       <div className="absolute inset-0 bg-black/40"></div>
@@ -28,7 +30,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="uppercase tracking-[0.3em] text-xs text-brand-sand/80 mb-8"
         >
-          A New Era of Living
+          {eyebrow}
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -36,8 +38,8 @@ export default function Hero() {
           transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="text-5xl md:text-7xl lg:text-8xl text-brand-sand font-serif mb-10 leading-tight"
         >
-          Built with intention.<br />
-          <span className="italic font-light text-brand-sand/90">Designed for a slower life.</span>
+          {heading}<br />
+          <span className="italic font-light text-brand-sand/90">{italic}</span>
         </motion.h1>
       </motion.div>
 
@@ -48,7 +50,7 @@ export default function Hero() {
         transition={{ delay: 2, duration: 1.5 }}
         className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 pointer-events-none"
       >
-        <span className="uppercase tracking-[0.2em] text-[10px] text-brand-sand/60 font-light drop-shadow-md">Scroll to Explore</span>
+        <span className="uppercase tracking-[0.2em] text-[10px] text-brand-sand/60 font-light drop-shadow-md">{scroll}</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}

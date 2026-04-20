@@ -1,4 +1,22 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    images: {
+        unoptimized: process.env.NODE_ENV === 'development',
+        remotePatterns: [
+            {
+                protocol: 'http',
+                hostname: 'seven9.local',
+            },
+            {
+                protocol: 'https',
+                hostname: 'seven9developers.in',
+            },
+            {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com',
+            }
+        ],
+    },
+}
 
-export default nextConfig;
+export default nextConfig

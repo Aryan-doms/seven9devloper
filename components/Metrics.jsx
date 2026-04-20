@@ -36,18 +36,10 @@ function AnimatedNumber({ value, inView }) {
   return <>{format()}</>
 }
 
-export default function Metrics() {
+export default function Metrics({ data }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
-
-  const stats = [
-    { value: '4+', suffix: 'Years Young', sub: 'Est. 2021' },
-    { value: '20+', suffix: 'Teammates', sub: 'And Growing' },
-    { value: '5+', suffix: 'Industry Awards', sub: 'Nationally Recognised' },
-    { value: '400+', suffix: 'Happy Customers', sub: 'Across Silvassa' },
-    { value: '3 Lakh+', suffix: 'Sq.ft Ongoing', sub: 'Under Construction' },
-    { value: '7k+', suffix: 'Sq.ft Delivered', sub: 'Successfully Completed' },
-  ]
+  const { eyebrow, stats } = data;
 
   return (
     <section
@@ -65,7 +57,7 @@ export default function Metrics() {
           transition={{ duration: 0.8 }}
           className="text-[10px] uppercase tracking-[0.35em] text-brand-clay font-semibold"
         >
-          By The Numbers
+          {eyebrow}
         </motion.p>
       </div>
 
@@ -82,12 +74,6 @@ export default function Metrics() {
             {/* Separator — visibility is precisely mapped per grid state:
                 mobile=2col, tablet=3col, desktop=6col */}
             {(() => {
-              // i=0 → never  
-              // i=1 → all grids (always between 2 items)
-              // i=2 → hide mobile (new row), show md+ 
-              // i=3 → show mobile, hide md (new row), show lg
-              // i=4 → hide mobile (new row), show md+
-              // i=5 → all grids
               let cls = null
               if (i === 1 || i === 5) cls = 'block'
               else if (i === 2 || i === 4) cls = 'hidden md:block'

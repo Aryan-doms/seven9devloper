@@ -3,59 +3,11 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export default function ProjectsShowcase() {
+export default function ProjectsShowcase({ data }) {
   const [filter, setFilter] = useState('All')
+  const { title: sectionTitle, projects } = data;
 
-  const projects = [
-    {
-      title: "Palladium Highstreet",
-      type: "ResiCommercial Building | 3BHK/4BHK",
-      location: "Silvassa DNH",
-      category: ["Residential", "Commercial"],
-      status: "New Launch",
-      image: "/Cam04-entrance-zoom-scaled.webp"
-    },
-    {
-      title: "Grandeur Bungalow",
-      type: "Residences / Villas | 4BHK/5BHK",
-      location: "Village Silvassa",
-      category: ["Residential"],
-      status: "Coming Soon",
-      image: "/Cam09-1-scaled.webp"
-    },
-    {
-      title: "Palladium Alcove",
-      type: "ResiCommercial Building | 1BHK/2BHK",
-      location: "Village Silvassa",
-      category: ["Residential", "Commercial"],
-      status: "Coming Soon",
-      image: "/Palladium-Highstreet-Club_Cam-v01-scaled.webp"
-    },
-    {
-      title: "Premaldeep Square",
-      type: "Commercial Building / Shops | 2000 sq.m",
-      location: "Village Silvassa DNH",
-      category: ["Commercial"],
-      status: "Completed",
-      image: "/Cam01-scaled.webp"
-    },
-    {
-      title: "The Market Pallete",
-      type: "ResiCommercial Building | 1BHK",
-      location: "Village Amli, Silvassa DNH",
-      category: ["Residential", "Commercial"],
-      status: "Completed",
-      image: "/Cam04-entrance-zoom-scaled.webp"
-    },
-    {
-      title: "Palladium Square",
-      type: "ResiCommercial Building | 1BHK",
-      location: "Silvassa DNH",
-      category: ["Residential", "Commercial"],
-      status: "Completed",
-      image: "/Cam09-1-scaled.webp"
-    }
-  ]
+  const categories = ['All', ...new Set(projects.flatMap(p => p.category))];
 
   const filteredProjects = projects.filter(project => 
     filter === 'All' ? true : project.category.includes(filter)
@@ -80,7 +32,7 @@ export default function ProjectsShowcase() {
           transition={{ duration: 1 }}
           className="text-3xl md:text-5xl font-serif text-brand-primary mb-12"
         >
-          Our Projects
+          {sectionTitle}
         </motion.h2>
 
         {/* Filter Tabs */}
@@ -90,7 +42,7 @@ export default function ProjectsShowcase() {
           viewport={{ once: true }}
           className="flex flex-wrap justify-center gap-4 md:gap-8"
         >
-          {['All', 'Residential', 'Commercial'].map((category) => (
+          {categories.map((category) => (
             <button
               key={category}
               onClick={() => setFilter(category)}
@@ -123,19 +75,23 @@ export default function ProjectsShowcase() {
             >
               {/* Image & Text Container */}
               <div className="relative overflow-hidden aspect-[4/5] w-full bg-brand-stone/20 rounded-sm shadow-sm group-hover:shadow-lg transition-shadow duration-500">
-                <Image
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-105"
-                  src={project.image}
-                />
+                {project.image && (
+                  <Image
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-105"
+                    src={project.image}
+                  />
+                )}
 
                 {/* Status Badge */}
-                <div className="absolute top-4 right-4 z-20">
-                  <span className={`text-[10px] uppercase font-semibold tracking-wider px-3 py-1.5 rounded-sm ${getStatusColor(project.status)} shadow-sm`}>
-                    {project.status}
-                  </span>
-                </div>
+                {project.status && (
+                  <div className="absolute top-4 right-4 z-20">
+                    <span className={`text-[10px] uppercase font-semibold tracking-wider px-3 py-1.5 rounded-sm ${getStatusColor(project.status)} shadow-sm`}>
+                      {project.status}
+                    </span>
+                  </div>
+                )}
                 
                 {/* Gradient overlay for text readability */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-700"></div>
