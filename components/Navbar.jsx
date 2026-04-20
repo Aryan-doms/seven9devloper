@@ -14,6 +14,16 @@ export default function Navbar() {
     categories: {} // stores which category is open on mobile
   })
 
+  // Fallback projects if API fetch fails or is slow
+  const fallbackProjects = [
+    { id: 'f1', slug: 'palladium-highstreet', title: { rendered: 'Palladium Highstreet' }, acf: { project_status: 'New Launch' } },
+    { id: 'f2', slug: 'grandeur-bungalow', title: { rendered: 'Grandeur Bungalow' }, acf: { project_status: 'Coming Soon' } },
+    { id: 'f3', slug: 'palladium-alcove', title: { rendered: 'Palladium Alcove' }, acf: { project_status: 'Coming Soon' } },
+    { id: 'f4', slug: 'premaldeep-square', title: { rendered: 'Premaldeep Square' }, acf: { project_status: 'Completed' } },
+    { id: 'f5', slug: 'the-market-pallete', title: { rendered: 'The Market Pallete' }, acf: { project_status: 'Completed' } },
+    { id: 'f6', slug: 'palladium-square', title: { rendered: 'Palladium Square' }, acf: { project_status: 'Completed' } }
+  ]
+
   const closeTimeoutRef = useRef(null)
 
   // Triggered when hovering the actual 'Projects' link
@@ -85,9 +95,11 @@ export default function Navbar() {
   // Precise Framer Motion easing from brand guidelines
   const easing = [0.16, 1, 0.3, 1]
 
-  // Grouping projects by status - matching exactly the WP field values provided
+  // Grouping projects by status - use fallback if no projects fetched yet
   const statuses = ['New Launch', 'Coming Soon', 'On Going', 'Completed']
-  const groupedProjects = projects.reduce((acc, p) => {
+  const displayProjects = projects.length > 0 ? projects : fallbackProjects
+  
+  const groupedProjects = displayProjects.reduce((acc, p) => {
     const status = p?.acf?.project_status || 'On Going' // Match WP "On Going"
     if (!acc[status]) acc[status] = []
     acc[status].push(p)
