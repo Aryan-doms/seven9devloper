@@ -42,7 +42,7 @@ export function StudioLegend({ contact }) {
   ]
 
   return (
-    <section className="py-32 bg-brand-sand relative">
+    <section id="office" className="py-32 bg-brand-sand relative">
       <div className="max-w-7xl mx-auto px-8 md:px-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-brand-primary/5">
           {legendItems.map((item, i) => (

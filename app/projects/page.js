@@ -14,23 +14,25 @@ async function getProjects() {
       { next: { revalidate: 60 } }
     )
     if (!res.ok) return []
+    console.log(`✅ CMS Sync: ${new Date().toLocaleTimeString()} | Projects Data Loaded`);
     return await res.json()
   } catch (error) {
-    console.error("Fetch Projects Error:", error);
+    console.error("❌ CMS Sync Error (Projects):", error);
     return []
   }
 }
 
 export default async function ProjectsPage() {
   const projectsData = await getProjects();
+  const syncTime = new Date().toLocaleTimeString();
 
   // Map CPT projects data
   const dynamicProjects = projectsData.map(p => ({
-    title: p?.title?.rendered || "",
     slug: p?.slug || "",
+    title: p?.title?.rendered || "",
     type: p?.acf?.project_type || "",
     location: p?.acf?.project_location || "",
-    status: p?.acf?.project_status || "",
+    status: p?.acf?.project_status === "On Going" ? "Under Construction" : (p?.acf?.project_status || ""),
     category: p?.acf?.project_categories || [],
     image: p?.acf?.project_image?.url || "/fallback.jpg"
   }));
@@ -52,7 +54,7 @@ export default async function ProjectsPage() {
       type: "Residential Development | 1/1.5/2 BHK",
       location: "Naroli, Silvassa",
       category: ["Residential"],
-      status: "On Going",
+      status: "Under Construction",
       image: "/Cam09-1-scaled.webp"
     },
     {
@@ -61,7 +63,7 @@ export default async function ProjectsPage() {
       type: "Residences / Villas | 4BHK/5BHK",
       location: "Village Silvassa",
       category: ["Residential"],
-      status: "On Going",
+      status: "Under Construction",
       image: "/Cam09-1-scaled.webp"
     },
     {
@@ -70,7 +72,7 @@ export default async function ProjectsPage() {
       type: "ResiCommercial Building | 1BHK/2BHK",
       location: "Village Silvassa",
       category: ["Residential", "Commercial"],
-      status: "On Going",
+      status: "Under Construction",
       image: "/Palladium-Highstreet-Club_Cam-v01-scaled.webp"
     },
     {
@@ -107,6 +109,7 @@ export default async function ProjectsPage() {
   return (
     <main className="bg-brand-primary min-h-screen">
       <ExhibitionScroller projects={projects} />
+      <div id="cms-sync-marker" style={{ display: 'none' }} data-last-sync={syncTime} />
     </main>
   )
 }

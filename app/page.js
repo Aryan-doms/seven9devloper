@@ -5,8 +5,6 @@ import Lifestyle from '@/components/Lifestyle'
 import Metrics from '@/components/Metrics'
 import CallToAction from '@/components/CallToAction'
 
-export const revalidate = 60;
-
 async function getPageData() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/pages?slug=home&_embed`, {
@@ -16,12 +14,11 @@ async function getPageData() {
     if (!res.ok) return {};
 
     const response = await res.json();
-    const data = response[0]?.acf || {};
-    console.log("--- DEBUG: WORDPRESS HOME DATA ---", data);
-    return data;
+    console.log(`✅ CMS Sync: ${new Date().toLocaleTimeString()} | Home Page Data Loaded`);
+    return response[0]?.acf || null;
   } catch (error) {
-    console.error("Fetch Page Error:", error);
-    return {};
+    console.error("❌ CMS Sync Error:", error);
+    return null;
   }
 }
 
@@ -45,12 +42,15 @@ export default async function Home() {
     getProjects()
   ]);
 
+  const syncTime = new Date().toLocaleTimeString();
+
   // Map CPT projects data
   const dynamicProjects = projectsData.map(p => ({
+    slug: p?.slug || "",
     title: p?.title?.rendered || "",
     type: p?.acf?.project_type || "",
     location: p?.acf?.project_location || "",
-    status: p?.acf?.project_status || "",
+    status: p?.acf?.project_status === "On Going" ? "Under Construction" : (p?.acf?.project_status || ""),
     category: p?.acf?.project_categories || [],
     image: p?.acf?.project_image?.url || "/fallback.jpg"
   }));
@@ -58,6 +58,7 @@ export default async function Home() {
   // Fallback static array if dynamic fetch returns empty
   const fallbackProjects = [
     {
+      slug: "palladium-highstreet",
       title: "Palladium Highstreet",
       type: "ResiCommercial Building | 3BHK/4BHK",
       location: "Silvassa DNH",
@@ -66,30 +67,34 @@ export default async function Home() {
       image: "/Cam04-entrance-zoom-scaled.webp"
     },
     {
+      slug: "palladium-park",
       title: "Palladium Park",
       type: "Residential Development | 1/1.5/2 BHK",
       location: "Naroli, Silvassa",
       category: ["Residential"],
-      status: "On Going",
+      status: "Under Construction",
       image: "/Cam09-1-scaled.webp"
     },
     {
+      slug: "the-grandeur",
       title: "The Grandeur",
       type: "Residences / Villas | 4BHK/5BHK",
       location: "Village Silvassa",
       category: ["Residential"],
-      status: "On Going",
+      status: "Under Construction",
       image: "/Cam09-1-scaled.webp"
     },
     {
+      slug: "palladium-alcove",
       title: "Palladium Alcove",
       type: "ResiCommercial Building | 1BHK/2BHK",
       location: "Village Silvassa",
       category: ["Residential", "Commercial"],
-      status: "On Going",
+      status: "Under Construction",
       image: "/Palladium-Highstreet-Club_Cam-v01-scaled.webp"
     },
     {
+      slug: "palladium-square",
       title: "Palladium Square",
       type: "ResiCommercial Building | 1BHK",
       location: "Silvassa DNH",
@@ -98,6 +103,7 @@ export default async function Home() {
       image: "/Cam09-1-scaled.webp"
     },
     {
+      slug: "the-market-pallete",
       title: "The Market Pallete",
       type: "ResiCommercial Building | 1BHK",
       location: "Village Amli, Silvassa DNH",
@@ -106,6 +112,7 @@ export default async function Home() {
       image: "/Cam04-entrance-zoom-scaled.webp"
     },
     {
+      slug: "premaldeep-square",
       title: "Premaldeep Square",
       type: "Commercial Building / Shops | 2000 sq.m",
       location: "Village Silvassa DNH",
@@ -148,68 +155,18 @@ export default async function Home() {
 
       <Lifestyle
         data={{
-          eyebrow: acf?.lifestyle_eyebrow || "Four pillars of quiet living",
-          heading: acf?.lifestyle_heading || "Spaces that breathe with you.",
-          items: acf?.pillar_features?.map(item => ({
-            src: item?.pillar_image?.url || "",
-            alt: item?.pillar_image?.alt || "",
-            title: item?.pillar_title || "",
-            description: item?.pillar_description || "",
-            features: item?.pillar_features
-              ? item.pillar_features.split(/\r?\n/).filter(Boolean)
-              : []
-          })) || [
-              {
-                src: '/79_mrg.webp',
-                alt: 'Community spaces at Seven9 Developers',
-                title: 'Community',
-                description: 'Spaces that bring people together.',
-                features: [
-                  'Curated clubhouse for residents',
-                  'Banquet hall for celebrations',
-                  'Double height private theatre',
-                  'Waiting lounge for guests'
-                ]
-              },
-              {
-                src: '/79_wellness.webp',
-                alt: 'Nature at Seven9 Developers',
-                title: 'Nature',
-                description: 'Green living, every single day.',
-                features: [
-                  'Private garden on every floor',
-                  'Scenic walkway through the complex',
-                  'Terrace seating with open sky views',
-                  'Gazebo seating for quiet mornings'
-                ]
-              },
-              {
-                src: '/79_social.webp',
-                alt: 'Wellbeing at Seven9 Developers',
-                title: 'Wellbeing',
-                description: 'Designed for every generation.',
-                features: [
-                  'Swimming pool with deck area',
-                  'Fully equipped fitness centre',
-                  'Dedicated kids play area',
-                  'Senior citizen seating and temple'
-                ]
-              },
-              {
-                src: '/79_privacacy.webp',
-                alt: 'Craft and quality at Seven9 Developers',
-                title: 'Craft',
-                description: 'Premium finish in every detail.',
-                features: [
-                  '24/7 CCTV surveillance',
-                  'Sculpture garden promenade',
-                  'Secured gated community',
-                  'Premium materials throughout'
-                ]
-              }
-            ]
+          eyebrow: acf?.lifestyle_eyebrow || "Our Lifestyle",
+          heading: acf?.lifestyle_heading || "A sanctuary for the modern soul.",
+          text: acf?.lifestyle_text || "Every detail is curated to enhance your daily rituals and bring a sense of peace.",
+          images: acf?.lifestyle_gallery?.map(img => img.url) || [
+            "/Interior-scaled.webp",
+            "/Palladium-Park-Block-A-scaled.webp",
+            "/The-Market-Pallete-scaled.webp"
+          ]
         }}
       />
+
+      <Awards />
 
       <Metrics
         data={{
@@ -223,21 +180,23 @@ export default async function Home() {
               { value: '20+', suffix: 'Teammates', sub: 'And Growing' },
               { value: '5+', suffix: 'Industry Awards', sub: 'Nationally Recognised' },
               { value: '400+', suffix: 'Happy Customers', sub: 'Across Silvassa' },
-              { value: '3 Lakh+', suffix: 'Sq.ft Ongoing', sub: 'Under Construction' },
-              { value: '7k+', suffix: 'Sq.ft Delivered', sub: 'Successfully Completed' },
+              { value: '3 Lakh+', suffix: 'Sq.ft Under Construction', sub: 'Across Ongoing Sites' },
+              { value: '67k+', suffix: 'Sq.ft Delivered', sub: 'Successfully Completed' },
             ]
         }}
       />
 
       <CallToAction
         data={{
-          eyebrow: acf?.cta_eyebrow || "Your Next Chapter",
-          heading: acf?.cta_heading || "Come experience it",
-          italic: acf?.cta_heading_italic || "in person.",
-          btn1: { text: acf?.btn_1_text || "Book Visit", link: acf?.btn_1_link || "#" },
-          btn2: { text: acf?.btn_2_text || "Contact", link: acf?.btn_2_link || "#" }
+          eyebrow: "Your Next Chapter",
+          heading: "Come experience it",
+          italic: "in person.",
+          btn1: { text: "Book Visit", link: "/contact" },
+          btn2: { text: "Contact", link: "/contact#office" }
         }}
       />
+
+      <div id="cms-sync-marker" style={{ display: 'none' }} data-last-sync={syncTime} />
     </main>
   )
 }

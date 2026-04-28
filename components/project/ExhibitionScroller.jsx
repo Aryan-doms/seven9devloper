@@ -9,7 +9,7 @@ export default function ExhibitionScroller({ projects = [] }) {
   const getStatusColor = (status) => {
     switch(status) {
       case 'Coming Soon': return 'bg-brand-clay text-white'
-      case 'On Going': return 'bg-brand-secondary text-white'
+      case 'Under Construction': return 'bg-brand-secondary text-white'
       case 'Completed': return 'bg-brand-primary text-brand-sand'
       default: return 'bg-brand-primary text-brand-sand'
     }

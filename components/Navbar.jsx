@@ -17,9 +17,9 @@ export default function Navbar() {
   // Fallback projects if API fetch fails or is slow
   const fallbackProjects = [
     { id: 'f1', slug: 'palladium-highstreet', title: { rendered: 'Palladium Highstreet' }, acf: { project_status: 'Coming Soon' } },
-    { id: 'f2', slug: 'palladium-park', title: { rendered: 'Palladium Park' }, acf: { project_status: 'On Going' } },
-    { id: 'f3', slug: 'grandeur-bungalow', title: { rendered: 'The Grandeur' }, acf: { project_status: 'On Going' } },
-    { id: 'f4', slug: 'palladium-alcove', title: { rendered: 'Palladium Alcove' }, acf: { project_status: 'On Going' } },
+    { id: 'f2', slug: 'palladium-park', title: { rendered: 'Palladium Park' }, acf: { project_status: 'Under Construction' } },
+    { id: 'f3', slug: 'grandeur-bungalow', title: { rendered: 'The Grandeur' }, acf: { project_status: 'Under Construction' } },
+    { id: 'f4', slug: 'palladium-alcove', title: { rendered: 'Palladium Alcove' }, acf: { project_status: 'Under Construction' } },
     { id: 'f5', slug: 'palladium-square', title: { rendered: 'Palladium Square' }, acf: { project_status: 'Completed' } },
     { id: 'f6', slug: 'the-market-pallete', title: { rendered: 'The Market Pallete' }, acf: { project_status: 'Completed' } },
     { id: 'f7', slug: 'premaldeep-square', title: { rendered: 'Premaldeep Square' }, acf: { project_status: 'Completed' } }
@@ -118,11 +118,12 @@ export default function Navbar() {
   const easing = [0.16, 1, 0.3, 1]
 
   // Grouping projects by status - use fallback if no projects fetched yet
-  const statuses = ['New Launch', 'Coming Soon', 'On Going', 'Completed']
+  const statuses = ['New Launch', 'Coming Soon', 'Under Construction', 'Completed']
   const displayProjects = projects.length > 0 ? projects : fallbackProjects
   
   const groupedProjects = displayProjects.reduce((acc, p) => {
-    const status = p?.acf?.project_status || 'On Going' // Match WP "On Going"
+    const rawStatus = p?.acf?.project_status || 'Under Construction'
+    const status = rawStatus === 'On Going' ? 'Under Construction' : rawStatus
     if (!acc[status]) acc[status] = []
     acc[status].push(p)
     return acc

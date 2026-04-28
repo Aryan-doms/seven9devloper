@@ -28,9 +28,10 @@ function AnimatedNumber({ value, inView }) {
   }, [inView, numericEnd])
 
   const format = () => {
-    if (value.includes('Lakh')) return `${display} L+`
-    if (value.includes('k')) return `${display}k`
-    return `${display}+`
+    const hasPlus = value.includes('+');
+    if (value.includes('Lakh')) return `${display} L${hasPlus ? '+' : ''}`
+    if (value.includes('k')) return `${display}k${hasPlus ? '+' : ''}`
+    return `${display}${hasPlus ? '+' : ''}`
   }
 
   return <>{format()}</>
