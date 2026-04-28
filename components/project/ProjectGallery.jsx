@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -38,10 +38,24 @@ export default function ProjectGallery({ project }) {
     return () => { document.body.style.overflow = 'unset' }
   }, [isOpen])
 
+  const scrollRef = useRef(null)
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const { current } = scrollRef
+      const scrollAmount = 470 // Image width + gap
+      current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   if (images.length === 0) return null
 
   return (
-    <section className="py-24 md:py-40 bg-brand-stone/20 border-b border-brand-primary/10 overflow-hidden">
+    <section className="pt-24 md:pt-40 pb-10 md:pb-16 bg-brand-stone/20 border-b border-brand-primary/10 overflow-hidden">
+      {/* Header Container */}
       <div className="max-w-7xl mx-auto px-8 md:px-16 mb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,14 +71,40 @@ export default function ProjectGallery({ project }) {
         </motion.div>
       </div>
 
-      {/* Horizontal scroll strip */}
-      <div className="relative">
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-8 md:px-16 pb-6">
+      {/* Main Container with Arrows */}
+      <div className="max-w-7xl mx-auto px-8 md:px-16 relative group/gallery">
+        {/* Navigation Arrows */}
+        {images.length > 1 && (
+          <div className="hidden md:flex absolute inset-y-0 left-6 right-6 items-center justify-between pointer-events-none z-10">
+            <button 
+              onClick={() => scroll('left')}
+              className="w-10 h-10 rounded-full border border-brand-primary/10 bg-white shadow-sm flex items-center justify-center text-brand-primary hover:bg-brand-primary hover:text-white transition-all pointer-events-auto"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button 
+              onClick={() => scroll('right')}
+              className="w-10 h-10 rounded-full border border-brand-primary/10 bg-white shadow-sm flex items-center justify-center text-brand-primary hover:bg-brand-primary hover:text-white transition-all pointer-events-auto"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        )}
+
+        {/* Scrollable Strip */}
+        <div
+          ref={scrollRef}
+          className="flex gap-4 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-6"
+        >
           {images.map((img, i) => (
             <button
               key={i}
               onClick={() => openLightbox(i)}
-              className="relative flex-none w-[75vw] sm:w-[450px] h-[380px] md:h-[420px] snap-center overflow-hidden rounded-sm bg-brand-stone/30 cursor-pointer group focus:outline-none"
+              className="relative flex-none w-[85vw] sm:w-[450px] h-[380px] md:h-[420px] snap-start overflow-hidden rounded-sm bg-brand-stone/30 cursor-pointer group focus:outline-none"
               aria-label={`Open gallery image ${i + 1}`}
             >
               <Image
@@ -133,27 +173,27 @@ export default function ProjectGallery({ project }) {
               />
             </motion.div>
 
-            {/* Prev Arrow */}
-            <button
-              onClick={(e) => { e.stopPropagation(); goPrev() }}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 text-white p-3 hover:text-brand-clay transition-colors"
-              aria-label="Previous image"
-            >
-              <svg className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-              </svg>
-            </button>
-
-            {/* Next Arrow */}
-            <button
-              onClick={(e) => { e.stopPropagation(); goNext() }}
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 text-white p-3 hover:text-brand-clay transition-colors"
-              aria-label="Next image"
-            >
-              <svg className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-              </svg>
-            </button>
+            {/* Navigation Buttons (Desktop only) */}
+            {images.length > 1 && (
+              <div className="hidden md:flex absolute inset-x-8 top-1/2 -translate-y-1/2 justify-between pointer-events-none w-[calc(100%-4rem)]">
+                <button
+                  onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                  className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:text-white hover:border-white transition-all pointer-events-auto"
+                >
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); goNext(); }}
+                  className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:text-white hover:border-white transition-all pointer-events-auto"
+                >
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

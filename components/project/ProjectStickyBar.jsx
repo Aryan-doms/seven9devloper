@@ -19,9 +19,9 @@ export default function ProjectStickyBar({ project }) {
 
   const handleEnquire = (e) => {
     e.preventDefault()
-    const target = document.getElementById('location')
+    const target = document.getElementById('enquiry-form')
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
   }
 

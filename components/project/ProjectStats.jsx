@@ -3,13 +3,13 @@ import { motion } from 'framer-motion'
 
 const getStats = (project) => {
   return [
-    { label: 'Floors',        value: project?.acf?.project_floors     || 'G+13 Storeys' },
-    { label: 'Configuration', value: project?.acf?.project_bhk        || '3 & 4 BHK' },
-    { label: 'Carpet Area',   value: project?.acf?.project_unit_size  || '1200 - 1800 sq.ft' },
-    { label: 'Project Area',  value: project?.acf?.project_area       || '2 Acres' },
-    { label: 'Possession',    value: project?.acf?.project_possession || 'Dec 2026' },
-    { 
-      label: project?.acf?.highlight_label || 'Highlight', 
+    { label: 'Floors', value: project?.acf?.project_floors || 'G+13 Storeys' },
+    { label: 'Configuration', value: project?.acf?.project_bhk || '3 & 4 BHK' },
+    { label: 'Unit Size', value: project?.acf?.project_unit_size || '1200 - 1800 sq.ft' },
+    { label: 'Project Area', value: project?.acf?.project_area || '2 Acres' },
+    { label: 'Possession', value: project?.acf?.project_possession || 'Dec 2026' },
+    {
+      label: project?.acf?.highlight_label || 'Highlight',
       value: project?.acf?.highlight_value || 'Eco-Friendly'
     },
   ]
@@ -47,7 +47,7 @@ export default function ProjectStats({ project }) {
                 >
                   {stat.value}
                 </span>
-                
+
                 {/* Minimalist clay underline as seen on homepage metrics */}
                 <motion.div
                   initial={{ scaleX: 0 }}

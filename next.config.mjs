@@ -9,6 +9,10 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
+                hostname: 'dev-seven9-devlopers.pantheonsite.io',
+            },
+            {
+                protocol: 'https',
                 hostname: 'seven9developers.in',
             },
             {

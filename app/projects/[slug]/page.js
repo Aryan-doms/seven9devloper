@@ -37,7 +37,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const project = await getProject(params.slug)
+  const { slug } = await params
+  const project = await getProject(slug)
   if (!project) return {}
   return {
     title: `${project.title?.rendered || 'Project'} | Seven9 Developers`,
@@ -46,7 +47,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ProjectPage({ params }) {
-  const project = await getProject(params.slug)
+  const { slug } = await params
+  const project = await getProject(slug)
   if (!project) notFound()
 
   return (

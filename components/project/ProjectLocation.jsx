@@ -1,13 +1,11 @@
 'use client'
 import { motion } from 'framer-motion'
+import LeadForm from '../common/LeadForm'
 
 export default function ProjectLocation({ project }) {
   const mapEmbedUrl  = project?.acf?.map_embed_url      || ''
   const address      = project?.acf?.project_address    || ''
   const proximity    = project?.acf?.proximity_list     || []
-  const formAction   = project?.acf?.google_form_action_url
-    ? project.acf.google_form_action_url
-    : `mailto:seven9devconllp@gmail.com?subject=Enquiry: ${encodeURIComponent(project?.title?.rendered || 'Project')}`
   const projectName  = project?.title?.rendered || 'this project'
 
   return (
@@ -98,6 +96,7 @@ export default function ProjectLocation({ project }) {
 
           {/* Right — Enquiry Form */}
           <motion.div
+            id="enquiry-form"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
@@ -108,39 +107,10 @@ export default function ProjectLocation({ project }) {
               Enquire Now
             </h2>
 
-            <form
-              action={formAction}
-              method="POST"
-              target="_blank"
-              className="flex flex-col gap-5"
-            >
-              <input
-                type="text"
-                name="entry.name"
-                placeholder="Full Name"
-                required
-                className="w-full border border-brand-stone bg-white text-brand-primary placeholder-brand-secondary text-sm font-light px-5 py-4 outline-none focus:border-brand-clay transition-colors duration-300"
-              />
-              <input
-                type="tel"
-                name="entry.phone"
-                placeholder="Phone Number"
-                required
-                className="w-full border border-brand-stone bg-white text-brand-primary placeholder-brand-secondary text-sm font-light px-5 py-4 outline-none focus:border-brand-clay transition-colors duration-300"
-              />
-              <textarea
-                name="entry.message"
-                rows={3}
-                placeholder="Message (optional)"
-                className="w-full border border-brand-stone bg-white text-brand-primary placeholder-brand-secondary text-sm font-light px-5 py-4 outline-none focus:border-brand-clay transition-colors duration-300 resize-none"
-              />
-              <button
-                type="submit"
-                className="w-full bg-brand-clay text-brand-primary uppercase tracking-[0.2em] text-xs font-semibold py-5 hover:bg-brand-stone transition-colors duration-300 shadow-sm"
-              >
-                Send Enquiry
-              </button>
-            </form>
+            <LeadForm 
+              projectName={projectName} 
+              formAction={project?.acf?.google_form_action_url} 
+            />
 
             <p className="text-[10px] uppercase tracking-[0.15em] text-brand-secondary text-center mt-6 font-light">
               We'll respond within 24 hours

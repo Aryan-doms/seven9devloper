@@ -16,13 +16,18 @@ export default function Navbar() {
 
   // Fallback projects if API fetch fails or is slow
   const fallbackProjects = [
-    { id: 'f1', slug: 'palladium-highstreet', title: { rendered: 'Palladium Highstreet' }, acf: { project_status: 'New Launch' } },
-    { id: 'f2', slug: 'grandeur-bungalow', title: { rendered: 'Grandeur Bungalow' }, acf: { project_status: 'Coming Soon' } },
-    { id: 'f3', slug: 'palladium-alcove', title: { rendered: 'Palladium Alcove' }, acf: { project_status: 'Coming Soon' } },
+    { id: 'f1', slug: 'palladium-highstreet', title: { rendered: 'Palladium Highstreet' }, acf: { project_status: 'Coming Soon' } },
+    { id: 'f2', slug: 'grandeur-bungalow', title: { rendered: 'Grandeur Bungalow' }, acf: { project_status: 'On Going' } },
+    { id: 'f3', slug: 'palladium-alcove', title: { rendered: 'Palladium Alcove' }, acf: { project_status: 'On Going' } },
     { id: 'f4', slug: 'premaldeep-square', title: { rendered: 'Premaldeep Square' }, acf: { project_status: 'Completed' } },
     { id: 'f5', slug: 'the-market-pallete', title: { rendered: 'The Market Pallete' }, acf: { project_status: 'Completed' } },
     { id: 'f6', slug: 'palladium-square', title: { rendered: 'Palladium Square' }, acf: { project_status: 'Completed' } }
   ]
+
+  const [globalContact, setGlobalContact] = useState({
+    phone: "+91 77790 02147",
+    email: "seven9devconllp@gmail.com"
+  })
 
   const closeTimeoutRef = useRef(null)
 
@@ -54,19 +59,35 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Fetch Projects from WordPress
+  // Fetch Projects and Global Data from WordPress
   useEffect(() => {
-    async function fetchProjects() {
+    async function fetchData() {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100`)
-        if (!res.ok) return
-        const data = await res.json()
-        setProjects(data)
+        const [projRes, pageRes] = await Promise.all([
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/pages?slug=global-settings&_embed`)
+        ])
+        
+        if (projRes.ok) {
+          const data = await projRes.json()
+          setProjects(data)
+        }
+
+        if (pageRes.ok) {
+          const data = await pageRes.json()
+          const acf = data[0]?.acf
+          if (acf?.contact_phone || acf?.contact_email) {
+            setGlobalContact({
+              phone: acf.contact_phone || "+91 77790 02147",
+              email: acf.contact_email || "seven9devconllp@gmail.com"
+            })
+          }
+        }
       } catch (err) {
-        console.error("Navbar Projects Error:", err)
+        console.error("Navbar Data Error:", err)
       }
     }
-    fetchProjects()
+    fetchData()
   }, [])
 
   // Close mobile menu when screen size increases past mobile breakpoint
@@ -211,10 +232,10 @@ export default function Navbar() {
                Book Visit
              </Link>
              <a 
-               href="tel:+917779002147" 
+               href={`tel:${globalContact.phone.replace(/\s+/g, '')}`} 
                className="flex items-center justify-center w-10 h-10 rounded-full border border-brand-primary text-brand-primary hover:text-brand-clay hover:border-brand-clay transition-colors duration-700"
                aria-label="Call Us"
-               title="Call Us"
+               title={`Call Us: ${globalContact.phone}`}
              >
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
@@ -373,11 +394,11 @@ export default function Navbar() {
                   >
                     Book Visit
                   </Link>
-                  <a href="tel:+917779002147" className="w-full flex items-center justify-center gap-3 py-4 text-brand-primary hover:text-brand-clay transition-colors duration-700 border border-brand-stone">
+                  <a href={`tel:${globalContact.phone.replace(/\s+/g, '')}`} className="w-full flex items-center justify-center gap-3 py-4 text-brand-primary hover:text-brand-clay transition-colors duration-700 border border-brand-stone">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                     </svg>
-                    <span className="text-sm tracking-widest font-medium uppercase mt-0.5">+91 77790 02147</span>
+                    <span className="text-sm tracking-widest font-medium uppercase mt-0.5">{globalContact.phone}</span>
                   </a>
                 </div>
               </motion.div>

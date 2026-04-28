@@ -26,7 +26,7 @@ async function getPageData() {
 async function getProjects() {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=6`,
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100`,
       { next: { revalidate: 60 } }
     )
     if (!res.ok) return []
@@ -151,7 +151,7 @@ export default async function Home() {
           })) || [
               {
                 src: '/79_mrg.webp',
-                alt: 'Community spaces at Seven9',
+                alt: 'Community spaces at Seven9 Developers',
                 title: 'Community',
                 description: 'Spaces that bring people together.',
                 features: [
@@ -163,7 +163,7 @@ export default async function Home() {
               },
               {
                 src: '/79_wellness.webp',
-                alt: 'Nature at Seven9',
+                alt: 'Nature at Seven9 Developers',
                 title: 'Nature',
                 description: 'Green living, every single day.',
                 features: [
@@ -175,7 +175,7 @@ export default async function Home() {
               },
               {
                 src: '/79_social.webp',
-                alt: 'Wellbeing at Seven9',
+                alt: 'Wellbeing at Seven9 Developers',
                 title: 'Wellbeing',
                 description: 'Designed for every generation.',
                 features: [
@@ -187,7 +187,7 @@ export default async function Home() {
               },
               {
                 src: '/79_privacacy.webp',
-                alt: 'Craft and quality at Seven9',
+                alt: 'Craft and quality at Seven9 Developers',
                 title: 'Craft',
                 description: 'Premium finish in every detail.',
                 features: [

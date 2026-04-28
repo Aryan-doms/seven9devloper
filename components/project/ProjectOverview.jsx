@@ -59,7 +59,7 @@ export default function ProjectOverview({ project }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="md:col-span-2 relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-brand-stone/30 group"
+            className="md:col-span-2 relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-brand-stone/30 group md:sticky md:top-32"
           >
             <Image
               src={overviewImg}
