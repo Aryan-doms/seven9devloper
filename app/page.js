@@ -3,6 +3,7 @@ import Philosophy from '@/components/Philosophy'
 import ProjectsShowcase from '@/components/ProjectsShowcase'
 import Lifestyle from '@/components/Lifestyle'
 import Metrics from '@/components/Metrics'
+import Awards from '@/components/Awards'
 import CallToAction from '@/components/CallToAction'
 
 async function getPageData() {
