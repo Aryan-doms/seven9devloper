@@ -10,7 +10,7 @@ export const revalidate = 60;
 async function getProjects() {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100&cb=${Date.now()}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100`,
       { next: { revalidate: 60 } }
     )
     if (!res.ok) return []
