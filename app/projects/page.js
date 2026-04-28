@@ -11,7 +11,7 @@ async function getProjects() {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100`,
-      { next: { revalidate: 60 } }
+      { cache: 'no-store' }
     )
     if (!res.ok) return []
     console.log(`✅ CMS Sync: ${new Date().toLocaleTimeString()} | Projects Data Loaded`);

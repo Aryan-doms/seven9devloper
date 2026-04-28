@@ -14,7 +14,7 @@ async function getProject(slug) {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?slug=${slug}&_embed`,
-      { next: { revalidate: 60 } }
+      { cache: 'no-store' }
     )
     if (!res.ok) return null
     const data = await res.json()
