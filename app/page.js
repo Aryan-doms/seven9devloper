@@ -46,7 +46,7 @@ export default async function Home() {
   const syncTime = new Date().toLocaleTimeString();
 
   // Map CPT projects data
-  const dynamicProjects = projectsData.map(p => ({
+  const dynamicProjects = (projectsData || []).map(p => ({
     slug: p?.slug || "",
     title: p?.title?.rendered || "",
     type: p?.acf?.project_type || "",
@@ -159,11 +159,13 @@ export default async function Home() {
           eyebrow: acf?.lifestyle_eyebrow || "Our Lifestyle",
           heading: acf?.lifestyle_heading || "A sanctuary for the modern soul.",
           text: acf?.lifestyle_text || "Every detail is curated to enhance your daily rituals and bring a sense of peace.",
-          images: acf?.lifestyle_gallery?.map(img => img.url) || [
-            "/Interior-scaled.webp",
-            "/Palladium-Park-Block-A-scaled.webp",
-            "/The-Market-Pallete-scaled.webp"
-          ]
+          images: (acf?.lifestyle_gallery?.length > 0) 
+            ? acf.lifestyle_gallery.map(img => img?.url).filter(Boolean) 
+            : [
+                "/Interior-scaled.webp",
+                "/Palladium-Park-Block-A-scaled.webp",
+                "/The-Market-Pallete-scaled.webp"
+              ]
         }}
       />
 
@@ -172,11 +174,13 @@ export default async function Home() {
       <Metrics
         data={{
           eyebrow: acf?.metrics_eyebrow || "By The Numbers",
-          stats: acf?.metrics_stats?.map(s => ({
-            value: s?.stat_value || "",
-            suffix: s?.stat_suffix || "",
-            sub: s?.stat_subtext || ""
-          })) || [
+          stats: (acf?.metrics_stats?.length > 0) 
+            ? acf.metrics_stats.map(s => ({
+                value: s?.stat_value || "",
+                suffix: s?.stat_suffix || "",
+                sub: s?.stat_subtext || ""
+              })) 
+            : [
               { value: '4+', suffix: 'Years Young', sub: 'Est. 2021' },
               { value: '20+', suffix: 'Teammates', sub: 'And Growing' },
               { value: '5+', suffix: 'Industry Awards', sub: 'Nationally Recognised' },
