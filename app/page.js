@@ -156,34 +156,35 @@ export default async function Home() {
           eyebrow: acf?.lifestyle_eyebrow || "Our Lifestyle",
           heading: acf?.lifestyle_heading || "A sanctuary for the modern soul.",
           text: acf?.lifestyle_text || "Every detail is curated to enhance your daily rituals and bring a sense of peace.",
-          items: (acf?.lifestyle_gallery?.length > 0) 
-            ? acf.lifestyle_gallery.map(img => ({
-                src: img?.url || "",
-                alt: img?.alt || "Lifestyle",
-                title: img?.title || "Quiet Living",
-                description: img?.caption || "Designed for the modern soul."
+          items: (acf?.pillar_features?.length > 0) 
+            ? acf.pillar_features.map(p => ({
+                src: p?.pillar_image?.url || "",
+                alt: p?.pillar_title || "Lifestyle",
+                title: p?.pillar_title || "Feature",
+                description: p?.pillar_description || "",
+                features: p?.pillar_features ? p.pillar_features.split("\r\n") : []
               }))
             : [
                 {
-                  src: "/Interior-scaled.webp",
+                  src: "/Cam03-scaled.webp",
                   alt: "Community",
                   title: "Community",
                   description: "Spaces that bring people together."
                 },
                 {
-                  src: "/Palladium-Park-Block-A-scaled.webp",
+                  src: "/Cam09-1-scaled.webp",
                   alt: "Nature",
                   title: "Nature",
                   description: "Green living, every single day."
                 },
                 {
-                  src: "/The-Market-Pallete-scaled.webp",
+                  src: "/Cam01-scaled.webp",
                   alt: "Wellbeing",
                   title: "Wellbeing",
                   description: "Designed for every generation."
                 },
                 {
-                  src: "/Cam01-scaled.webp",
+                  src: "/Palladium-Highstreet-Club_Cam-v01-scaled.webp",
                   alt: "Craft",
                   title: "Craft",
                   description: "Premium finish in every detail."
