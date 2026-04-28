@@ -100,7 +100,6 @@ export default async function Footer() {
           <div className="flex flex-col gap-3 text-sm text-brand-secondary font-light md:text-right w-full">
             <a className="hover:text-brand-clay transition-colors" href="/projects">Projects</a>
             <a className="hover:text-brand-clay transition-colors" href="/about">About Us</a>
-            <a className="hover:text-brand-clay transition-colors" href="/careers">Careers</a>
             <a className="hover:text-brand-clay transition-colors" href="/contact">Contact Us</a>
           </div>
         </div>
