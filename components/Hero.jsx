@@ -19,7 +19,7 @@ export default function Hero({ data }) {
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 mix-blend-multiply flex pointer-events-none"></div>
 
       {/* The cinematic fadeout wrapper for the text */}
-      <motion.div 
+      <motion.div
         animate={{ opacity: [0, 1, 1, 0] }}
         transition={{ duration: 7, times: [0, 0.15, 0.85, 1], ease: "easeInOut" }}
         className="relative z-10 text-center px-4 max-w-5xl pointer-events-none flex flex-col items-center justify-center w-full h-full pt-16"

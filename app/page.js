@@ -9,7 +9,7 @@ export const revalidate = 60;
 
 async function getPageData() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/pages?slug=home&_embed`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/pages?slug=home&_embed&cb=${Date.now()}`, {
       next: { revalidate: 60 }
     });
 
@@ -26,7 +26,7 @@ async function getPageData() {
 async function getProjects() {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100`,
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100&cb=${Date.now()}`,
       { next: { revalidate: 60 } }
     )
     if (!res.ok) return []
@@ -60,15 +60,23 @@ export default async function Home() {
       type: "ResiCommercial Building | 3BHK/4BHK",
       location: "Silvassa DNH",
       category: ["Residential", "Commercial"],
-      status: "New Launch",
+      status: "Coming Soon",
       image: "/Cam04-entrance-zoom-scaled.webp"
     },
     {
-      title: "Grandeur Bungalow",
+      title: "Palladium Park",
+      type: "Residential Development | 1/1.5/2 BHK",
+      location: "Naroli, Silvassa",
+      category: ["Residential"],
+      status: "On Going",
+      image: "/Cam09-1-scaled.webp"
+    },
+    {
+      title: "The Grandeur",
       type: "Residences / Villas | 4BHK/5BHK",
       location: "Village Silvassa",
       category: ["Residential"],
-      status: "Coming Soon",
+      status: "On Going",
       image: "/Cam09-1-scaled.webp"
     },
     {
@@ -76,16 +84,16 @@ export default async function Home() {
       type: "ResiCommercial Building | 1BHK/2BHK",
       location: "Village Silvassa",
       category: ["Residential", "Commercial"],
-      status: "Coming Soon",
+      status: "On Going",
       image: "/Palladium-Highstreet-Club_Cam-v01-scaled.webp"
     },
     {
-      title: "Premaldeep Square",
-      type: "Commercial Building / Shops | 2000 sq.m",
-      location: "Village Silvassa DNH",
-      category: ["Commercial"],
+      title: "Palladium Square",
+      type: "ResiCommercial Building | 1BHK",
+      location: "Silvassa DNH",
+      category: ["Residential", "Commercial"],
       status: "Completed",
-      image: "/Cam01-scaled.webp"
+      image: "/Cam09-1-scaled.webp"
     },
     {
       title: "The Market Pallete",
@@ -96,12 +104,12 @@ export default async function Home() {
       image: "/Cam04-entrance-zoom-scaled.webp"
     },
     {
-      title: "Palladium Square",
-      type: "ResiCommercial Building | 1BHK",
-      location: "Silvassa DNH",
-      category: ["Residential", "Commercial"],
+      title: "Premaldeep Square",
+      type: "Commercial Building / Shops | 2000 sq.m",
+      location: "Village Silvassa DNH",
+      category: ["Commercial"],
       status: "Completed",
-      image: "/Cam09-1-scaled.webp"
+      image: "/Cam01-scaled.webp"
     }
   ];
 

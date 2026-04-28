@@ -10,7 +10,7 @@ export const revalidate = 60;
 async function getProjects() {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100`,
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100&cb=${Date.now()}`,
       { next: { revalidate: 60 } }
     )
     if (!res.ok) return []
@@ -47,7 +47,16 @@ export default async function ProjectsPage() {
       image: "/Cam04-entrance-zoom-scaled.webp"
     },
     {
-      title: "Grandeur Bungalow",
+      title: "Palladium Park",
+      slug: "palladium-park",
+      type: "Residential Development | 1/1.5/2 BHK",
+      location: "Naroli, Silvassa",
+      category: ["Residential"],
+      status: "On Going",
+      image: "/Cam09-1-scaled.webp"
+    },
+    {
+      title: "The Grandeur",
       slug: "grandeur-bungalow",
       type: "Residences / Villas | 4BHK/5BHK",
       location: "Village Silvassa",
@@ -65,13 +74,13 @@ export default async function ProjectsPage() {
       image: "/Palladium-Highstreet-Club_Cam-v01-scaled.webp"
     },
     {
-      title: "Premaldeep Square",
-      slug: "premaldeep-square",
-      type: "Commercial Building / Shops | 2000 sq.m",
-      location: "Village Silvassa DNH",
-      category: ["Commercial"],
+      title: "Palladium Square",
+      slug: "palladium-square",
+      type: "ResiCommercial Building | 1BHK",
+      location: "Silvassa DNH",
+      category: ["Residential", "Commercial"],
       status: "Completed",
-      image: "/Cam01-scaled.webp"
+      image: "/Cam09-1-scaled.webp"
     },
     {
       title: "The Market Pallete",
@@ -83,13 +92,13 @@ export default async function ProjectsPage() {
       image: "/Cam04-entrance-zoom-scaled.webp"
     },
     {
-      title: "Palladium Square",
-      slug: "palladium-square",
-      type: "ResiCommercial Building | 1BHK",
-      location: "Silvassa DNH",
-      category: ["Residential", "Commercial"],
+      title: "Premaldeep Square",
+      slug: "premaldeep-square",
+      type: "Commercial Building / Shops | 2000 sq.m",
+      location: "Village Silvassa DNH",
+      category: ["Commercial"],
       status: "Completed",
-      image: "/Cam09-1-scaled.webp"
+      image: "/Cam01-scaled.webp"
     }
   ];
 

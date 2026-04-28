@@ -17,11 +17,12 @@ export default function Navbar() {
   // Fallback projects if API fetch fails or is slow
   const fallbackProjects = [
     { id: 'f1', slug: 'palladium-highstreet', title: { rendered: 'Palladium Highstreet' }, acf: { project_status: 'Coming Soon' } },
-    { id: 'f2', slug: 'grandeur-bungalow', title: { rendered: 'Grandeur Bungalow' }, acf: { project_status: 'On Going' } },
-    { id: 'f3', slug: 'palladium-alcove', title: { rendered: 'Palladium Alcove' }, acf: { project_status: 'On Going' } },
-    { id: 'f4', slug: 'premaldeep-square', title: { rendered: 'Premaldeep Square' }, acf: { project_status: 'Completed' } },
-    { id: 'f5', slug: 'the-market-pallete', title: { rendered: 'The Market Pallete' }, acf: { project_status: 'Completed' } },
-    { id: 'f6', slug: 'palladium-square', title: { rendered: 'Palladium Square' }, acf: { project_status: 'Completed' } }
+    { id: 'f2', slug: 'palladium-park', title: { rendered: 'Palladium Park' }, acf: { project_status: 'On Going' } },
+    { id: 'f3', slug: 'grandeur-bungalow', title: { rendered: 'The Grandeur' }, acf: { project_status: 'On Going' } },
+    { id: 'f4', slug: 'palladium-alcove', title: { rendered: 'Palladium Alcove' }, acf: { project_status: 'On Going' } },
+    { id: 'f5', slug: 'palladium-square', title: { rendered: 'Palladium Square' }, acf: { project_status: 'Completed' } },
+    { id: 'f6', slug: 'the-market-pallete', title: { rendered: 'The Market Pallete' }, acf: { project_status: 'Completed' } },
+    { id: 'f7', slug: 'premaldeep-square', title: { rendered: 'Premaldeep Square' }, acf: { project_status: 'Completed' } }
   ]
 
   const [globalContact, setGlobalContact] = useState({
@@ -138,8 +139,8 @@ export default function Navbar() {
       <nav 
         className={`fixed top-0 w-full z-50 transition-all duration-700 ease-[0.16,1,0.3,1] ${
           scrolled 
-            ? 'translate-y-0 opacity-100 bg-brand-sand shadow-sm py-4' 
-            : '-translate-y-full opacity-0 bg-transparent py-4 shadow-none'
+            ? 'bg-brand-sand shadow-sm py-4' 
+            : 'bg-transparent py-6'
         }`}
       >
         {/* Centered container for links and mega-menu alignment */}
@@ -153,14 +154,14 @@ export default function Navbar() {
                 alt="Seven9 Developers Logo" 
                 width={140} 
                 height={40} 
-                className="object-contain h-8 w-auto md:h-10"
+                className={`object-contain transition-all duration-500 ${scrolled ? 'h-8 md:h-10' : 'h-10 md:h-12 brightness-0 invert'}`}
                 priority
               />
             </Link>
           </div>
 
           {/* Desktop Nav Options (Center) */}
-          <div className="hidden md:flex justify-center items-center space-x-12 text-xs uppercase tracking-[0.2em] font-sans text-brand-secondary shrink-0">
+          <div className={`hidden md:flex justify-center items-center space-x-12 text-xs uppercase tracking-[0.2em] font-sans shrink-0 transition-colors duration-500 ${scrolled ? 'text-brand-secondary' : 'text-white'}`}>
             {navLinks.map((link) => (
               <div 
                 key={link.name} 
@@ -170,6 +171,7 @@ export default function Navbar() {
               >
                 <Link 
                   href={link.href} 
+                  onClick={() => setProjectsHovered(false)}
                   className="hover:text-brand-clay transition-colors duration-700 whitespace-nowrap"
                 >
                   {link.name}
@@ -233,7 +235,7 @@ export default function Navbar() {
              </Link>
              <a 
                href={`tel:${globalContact.phone.replace(/\s+/g, '')}`} 
-               className="flex items-center justify-center w-10 h-10 rounded-full border border-brand-primary text-brand-primary hover:text-brand-clay hover:border-brand-clay transition-colors duration-700"
+               className={`flex items-center justify-center w-10 h-10 rounded-full border transition-colors duration-700 ${scrolled ? 'border-brand-primary text-brand-primary hover:text-brand-clay hover:border-brand-clay' : 'border-white text-white hover:text-brand-clay hover:border-brand-clay'}`}
                aria-label="Call Us"
                title={`Call Us: ${globalContact.phone}`}
              >
@@ -247,7 +249,7 @@ export default function Navbar() {
           <div className="md:hidden flex-1 flex justify-end items-center relative z-50">
             <button 
               onClick={() => setMobileMenuOpen(true)}
-              className="p-2 -mr-2 outline-none transition-colors duration-700 text-brand-primary hover:text-brand-clay"
+              className={`p-2 -mr-2 outline-none transition-colors duration-700 ${scrolled ? 'text-brand-primary hover:text-brand-clay' : 'text-white hover:text-brand-clay'}`}
               aria-label="Open menu"
             >
               <svg className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
@@ -301,7 +303,7 @@ export default function Navbar() {
                         <Link 
                           href={link.href} 
                           className="text-4xl font-serif text-brand-primary group-hover:text-brand-clay transition-colors duration-500" 
-                          onClick={!link.hasDropdown ? () => setMobileMenuOpen(false) : undefined}
+                          onClick={() => setMobileMenuOpen(false)}
                         >
                           {link.name}
                         </Link>
