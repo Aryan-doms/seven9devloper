@@ -27,7 +27,7 @@ export default async function ProjectsPage() {
   const syncTime = new Date().toLocaleTimeString();
 
   // Map CPT projects data
-  const dynamicProjects = projectsData.map(p => ({
+  const dynamicProjects = (projectsData || []).map(p => ({
     slug: p?.slug || "",
     title: p?.title?.rendered || "",
     type: p?.acf?.project_type || "",

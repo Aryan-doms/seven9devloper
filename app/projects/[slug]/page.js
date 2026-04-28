@@ -30,7 +30,7 @@ export async function generateStaticParams() {
       `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100`
     )
     const projects = await res.json()
-    return projects.map(p => ({ slug: p.slug }))
+    return (projects || []).map(p => ({ slug: p.slug }))
   } catch {
     return []
   }
