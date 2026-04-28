@@ -13,8 +13,7 @@ export const revalidate = 60
 async function getProject(slug) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?slug=${slug}&_embed`,
-      { cache: 'no-store' }
+      `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?slug=${slug}&_embed`
     )
     if (!res.ok) return null
     const data = await res.json()

@@ -48,3 +48,10 @@ uploads.pantheon_moved_*
 *.sql
 *.tar.gz
 *.zip
+
+# OS generated files
+Thumbs.db
+
+# WordPress Plugin (Uploaded manually, doesn't need to be in Next.js repo)
+seven9-revalidation.php
+seven9-revalidation.zip
