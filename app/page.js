@@ -16,7 +16,9 @@ async function getPageData() {
     if (!res.ok) return {};
 
     const response = await res.json();
-    return response[0]?.acf || {};
+    const data = response[0]?.acf || {};
+    console.log("--- DEBUG: WORDPRESS HOME DATA ---", data);
+    return data;
   } catch (error) {
     console.error("Fetch Page Error:", error);
     return {};
