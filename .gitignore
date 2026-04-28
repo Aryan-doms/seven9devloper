@@ -33,3 +33,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# SSH Keys (CRITICAL SECURITY)
+id_rsa
+id_rsa.pub
+*.ppk
+*.key
+*.pem
+
+# SFTP & Pantheon Cleanup
+winscp.ini
+.ssh/
+uploads.pantheon_moved_*
+*.sql
+*.tar.gz
+*.zip

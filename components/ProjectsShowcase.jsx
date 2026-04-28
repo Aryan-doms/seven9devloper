@@ -8,10 +8,11 @@ export default function ProjectsShowcase({ data }) {
   const [filter, setFilter] = useState('All')
   const { title: sectionTitle, projects } = data;
 
-  const categories = ['All', ...new Set(projects.flatMap(p => p.category))];
+  const safeProjects = projects || [];
+  const categories = ['All', ...new Set(safeProjects.flatMap(p => p?.category || []))];
 
-  const filteredProjects = projects.filter(project => 
-    filter === 'All' ? true : project.category.includes(filter)
+  const filteredProjects = safeProjects.filter(project => 
+    filter === 'All' ? true : project?.category?.includes(filter)
   )
 
   const getStatusColor = (status) => {

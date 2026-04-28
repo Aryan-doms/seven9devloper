@@ -17,7 +17,7 @@ export default function ExhibitionScroller({ projects = [] }) {
 
   return (
     <div className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth scrollbar-hide bg-brand-primary">
-      {projects.map((project, index) => (
+      {(projects || []).map((project, index) => (
         <section 
           key={project.slug || index} 
           className="relative h-screen w-full snap-start flex items-center justify-center overflow-hidden"
