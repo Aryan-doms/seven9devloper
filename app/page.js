@@ -7,7 +7,7 @@ import CallToAction from '@/components/CallToAction'
 
 async function getPageData() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/pages?slug=home&_embed`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/pages?slug=home&_embed&v=${Date.now()}`);
 
     if (!res.ok) return {};
 
