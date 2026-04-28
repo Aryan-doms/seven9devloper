@@ -159,12 +159,38 @@ export default async function Home() {
           eyebrow: acf?.lifestyle_eyebrow || "Our Lifestyle",
           heading: acf?.lifestyle_heading || "A sanctuary for the modern soul.",
           text: acf?.lifestyle_text || "Every detail is curated to enhance your daily rituals and bring a sense of peace.",
-          images: (acf?.lifestyle_gallery?.length > 0) 
-            ? acf.lifestyle_gallery.map(img => img?.url).filter(Boolean) 
+          items: (acf?.lifestyle_gallery?.length > 0) 
+            ? acf.lifestyle_gallery.map(img => ({
+                src: img?.url || "",
+                alt: img?.alt || "Lifestyle",
+                title: img?.title || "Quiet Living",
+                description: img?.caption || "Designed for the modern soul."
+              }))
             : [
-                "/Interior-scaled.webp",
-                "/Palladium-Park-Block-A-scaled.webp",
-                "/The-Market-Pallete-scaled.webp"
+                {
+                  src: "/Interior-scaled.webp",
+                  alt: "Community",
+                  title: "Community",
+                  description: "Spaces that bring people together."
+                },
+                {
+                  src: "/Palladium-Park-Block-A-scaled.webp",
+                  alt: "Nature",
+                  title: "Nature",
+                  description: "Green living, every single day."
+                },
+                {
+                  src: "/The-Market-Pallete-scaled.webp",
+                  alt: "Wellbeing",
+                  title: "Wellbeing",
+                  description: "Designed for every generation."
+                },
+                {
+                  src: "/Cam01-scaled.webp",
+                  alt: "Craft",
+                  title: "Craft",
+                  description: "Premium finish in every detail."
+                }
               ]
         }}
       />

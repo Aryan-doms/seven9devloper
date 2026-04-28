@@ -60,7 +60,7 @@ function LifestyleItem({ src, alt, title, description, features }) {
 }
 
 export default function Lifestyle({ data }) {
-  const { eyebrow, heading, items } = data;
+  const { eyebrow, heading = "", items = [] } = data;
 
   return (
     <section className="py-24 md:py-32 bg-brand-sand overflow-hidden">
@@ -74,10 +74,10 @@ export default function Lifestyle({ data }) {
         >
           <p className="text-brand-secondary uppercase tracking-[0.3em] text-[10px] md:text-xs mb-6 font-semibold">{eyebrow}</p>
           <h2 className="text-3xl md:text-5xl font-serif text-brand-primary max-w-2xl mx-auto leading-tight">
-            {heading.split('<br/>').map((line, i) => (
+            {(heading || "").split('<br/>').map((line, i) => (
               <span key={i}>
                 {line}
-                {i === 0 && <br />}
+                {i === 0 && (heading || "").includes('<br/>') && <br />}
               </span>
             ))}
           </h2>
@@ -93,7 +93,7 @@ export default function Lifestyle({ data }) {
           viewport={{ once: true, margin: "-100px" }}
           className="max-w-7xl mx-auto md:px-24 flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 gap-y-12 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-12 sm:pb-0 pr-8 sm:pr-0"
         >
-          {items.map((item, index) => (
+          {(items || []).map((item, index) => (
             <LifestyleItem key={index} {...item} />
           ))}
         </motion.div>
