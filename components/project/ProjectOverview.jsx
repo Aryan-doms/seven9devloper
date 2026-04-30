@@ -9,6 +9,13 @@ export default function ProjectOverview({ project }) {
   const overviewImg = project?.acf?.overview_image?.url || project?.acf?.project_image?.url || '/fallback.jpg'
   const overviewAlt = project?.acf?.overview_image?.alt || project?.title?.rendered || 'Project Overview'
 
+  const handleBrochureClick = (e) => {
+    if (!project?.acf?.brochure_url) {
+      e.preventDefault()
+      alert('The brochure for this project is currently being prepared and will be available soon.')
+    }
+  }
+
   return (
     <section className="py-24 md:py-40 bg-white border-b border-brand-primary/10">
       <div className="max-w-7xl mx-auto px-8 md:px-16">
@@ -43,6 +50,7 @@ export default function ProjectOverview({ project }) {
               href={brochureUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleBrochureClick}
               className="inline-flex items-center gap-3 bg-brand-clay text-brand-primary uppercase tracking-[0.2em] text-xs font-semibold px-10 py-5 hover:bg-brand-stone transition-colors duration-300 self-start"
             >
               {/* Download Icon */}

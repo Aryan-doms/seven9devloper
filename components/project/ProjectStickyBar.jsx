@@ -8,6 +8,13 @@ export default function ProjectStickyBar({ project }) {
   const projectName = project?.title?.rendered || 'Project'
   const brochureUrl = project?.acf?.brochure_url || '#'
 
+  const handleBrochureClick = (e) => {
+    if (!project?.acf?.brochure_url) {
+      e.preventDefault()
+      alert('The brochure for this project is currently being prepared and will be available soon.')
+    }
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       // Show bar after scrolling past 100vh
@@ -48,6 +55,7 @@ export default function ProjectStickyBar({ project }) {
                 href={brochureUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleBrochureClick}
                 className="px-5 py-2.5 border border-white/40 text-white text-[10px] uppercase tracking-[0.15em] font-semibold hover:bg-white/10 transition-colors duration-200"
               >
                 Brochure
