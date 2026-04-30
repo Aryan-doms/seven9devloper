@@ -67,63 +67,64 @@ export default function ProjectsShowcase({ data }) {
       >
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project, index) => (
-            <Link key={project.slug || project.title} href={`/projects/${project.slug}`}>
-              <motion.article
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="group flex flex-col w-[85vw] md:w-full shrink-0 snap-center md:snap-align-none cursor-pointer"
-              >
-                {/* Image & Text Container */}
-                <div className="relative overflow-hidden aspect-[4/5] w-full bg-brand-stone/20 rounded-sm shadow-sm group-hover:shadow-lg transition-shadow duration-500">
-                  {project.image && (
-                    <Image
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-105"
-                      src={project.image}
-                    />
-                  )}
+            <motion.article
+              key={project.slug || project.title}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="group flex flex-col w-[85vw] md:w-full shrink-0 snap-center md:snap-align-none"
+            >
+              {/* Image & Text Container */}
+              <div className="relative overflow-hidden aspect-[4/5] w-full bg-brand-stone/20 rounded-sm shadow-sm group-hover:shadow-lg transition-shadow duration-500">
+                {project.image && (
+                  <Image
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-105"
+                    src={project.image}
+                  />
+                )}
 
-                  {/* Status Badge */}
-                  {project.status && (
-                    <div className="absolute top-4 right-4 z-20">
-                      <span className={`text-[10px] uppercase font-semibold tracking-wider px-3 py-1.5 rounded-sm ${getStatusColor(project.status)} shadow-sm`}>
-                        {project.status}
-                      </span>
-                    </div>
-                  )}
+                {/* Status Badge */}
+                {project.status && (
+                  <div className="absolute top-4 right-4 z-20">
+                    <span className={`text-[10px] uppercase font-semibold tracking-wider px-3 py-1.5 rounded-sm ${getStatusColor(project.status)} shadow-sm`}>
+                      {project.status}
+                    </span>
+                  </div>
+                )}
+                
+                {/* Gradient overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-700"></div>
+
+                {/* The Typography (Inside the Image) */}
+                <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col items-start transform translate-y-[3.5rem] group-hover:translate-y-0 transition-transform duration-[0.6s] ease-[0.16,1,0.3,1]">
+                  <h3 className="text-xl lg:text-2xl font-serif text-brand-sand mb-2 leading-tight">
+                    {project.title}
+                  </h3>
                   
-                  {/* Gradient overlay for text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-700"></div>
-
-                  {/* The Typography (Inside the Image) */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col items-start transform translate-y-[3.5rem] group-hover:translate-y-0 transition-transform duration-[0.6s] ease-[0.16,1,0.3,1]">
-                    <h3 className="text-xl lg:text-2xl font-serif text-brand-sand mb-2 leading-tight">
-                      {project.title}
-                    </h3>
+                  <div className="flex flex-col items-start w-full">
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-brand-sand/70 font-light mb-1 opacity-0 group-hover:opacity-100 transition-opacity duration-[0.6s]">
+                      {project.type}
+                    </p>
+                    <p className="text-[9px] uppercase tracking-widest text-brand-sand/50 font-light mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-[0.6s] delay-75">
+                      {project.location}
+                    </p>
                     
-                    <div className="flex flex-col items-start w-full">
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-brand-sand/70 font-light mb-1 opacity-0 group-hover:opacity-100 transition-opacity duration-[0.6s]">
-                        {project.type}
-                      </p>
-                      <p className="text-[9px] uppercase tracking-widest text-brand-sand/50 font-light mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-[0.6s] delay-75">
-                        {project.location}
-                      </p>
-                      
-                      {/* High-end hover reveal "VIEW" indicator */}
-                      <div className="overflow-hidden">
-                        <span className="block text-[10px] uppercase tracking-[0.2em] text-brand-clay transform translate-y-full group-hover:translate-y-0 transition-transform duration-[0.6s] delay-100 font-semibold">
+                    {/* High-end hover reveal "VIEW" indicator */}
+                    <div className="overflow-hidden">
+                      <Link href={`/projects/${project.slug}`}>
+                        <span className="block text-[10px] uppercase tracking-[0.2em] text-brand-clay transform translate-y-full group-hover:translate-y-0 transition-transform duration-[0.6s] delay-100 font-semibold cursor-pointer hover:text-white transition-colors">
                           View Project
                         </span>
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 </div>
-              </motion.article>
-            </Link>
+              </div>
+            </motion.article>
           ))}
         </AnimatePresence>
       </motion.div>

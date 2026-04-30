@@ -9,7 +9,7 @@ export function StudioLegend({ contact }) {
     {
       label: 'Office Location',
       title: 'Silvassa, DNH',
-      value: 'Ring Road, Towards Lions School, Opp. HDFC Bank, Silvassa - 396230',
+      value: 'Ring Road, opp. Bikaner Sweets, Samarvarni, Silvassa, DNH 396230',
       link: 'https://maps.app.goo.gl/uUXbEUTf2tXqETni8',
       icon: (
         <svg className="w-5 h-5 text-brand-clay" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,8 +68,8 @@ export function StudioLegend({ contact }) {
               </h3>
 
               {item.link ? (
-                <a 
-                  href={item.link} 
+                <a
+                  href={item.link}
                   target={item.link.startsWith('http') ? "_blank" : undefined}
                   rel={item.link.startsWith('http') ? "noopener noreferrer" : undefined}
                   className="text-lg font-serif text-brand-primary group-hover:text-white transition-colors block leading-snug"
@@ -146,7 +146,7 @@ export function FullMapSection() {
           </span>
           <h4 className="text-2xl font-serif text-brand-primary mb-6">Find us on Google Maps</h4>
           <p className="text-sm text-brand-secondary font-light leading-relaxed mb-8">
-            Seven9 Developers Silvassa Ring Road, Towards Lions School, Opp. HDFC Bank, Silvassa, DNH - 396230
+            Seven9 Developers, 40 mt Ring Road, opp. Bikaner Sweets, Samarvarni, Silvassa, DNH 396230
           </p>
           <div className="pt-8 border-t border-brand-primary/10">
             <a

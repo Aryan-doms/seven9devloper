@@ -125,6 +125,7 @@ export default async function Home() {
       <Hero
         data={{
           video: acf?.hero_video_url || "https://res.cloudinary.com/dg7x2vzqx/video/upload/v1774694401/Palladium_Highstreet_Realestate_Palladiuminnovations_Home_Architecture_Palladium_Luxury_1080P_fj8rrx.mp4",
+          slides: acf?.hero_slides || [],
           eyebrow: acf?.hero_eyebrow || "A New Era of Living",
           heading: acf?.hero_heading || "Built with intention.",
           italic: acf?.hero_heading_italic || "Designed for a slower life.",
@@ -134,9 +135,9 @@ export default async function Home() {
 
       <Philosophy
         data={{
-          eyebrow: acf?.about_eyebrow || "About Us",
-          heading: acf?.about_heading || "We don’t just construct spaces. We shape landmarks that feel grounded, open, and alive.",
-          description: acf?.about_description || "With over a decade of experience dedicated to transforming Silvassa through innovative building practices, our mission transcends traditional construction. We are committed to creating safe, functional, and inspiring environments that enhance the lives of families and communities.",
+          eyebrow: acf?.about_eyebrow || "About Seven9",
+          heading: acf?.about_heading || "More than architecture. We build the backdrop for your life.",
+          description: acf?.about_description || "Welcome to Seven9 Devcon. For over a decade, we have been transforming the Silvassa region by blending innovative architecture with sustainable building practices. We believe that every project begins with your vision, and our mission is to craft inspiring, functional spaces that serve as the backdrop for life’s most important moments. At Seven9, we don’t just construct buildings—we build lasting legacies for families and our community.",
           image: {
             url: acf?.about_image?.url || "/Cam03-scaled.webp",
             alt: acf?.about_image?.alt || "About Us"

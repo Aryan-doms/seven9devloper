@@ -145,17 +145,17 @@ export default function Navbar() {
         }`}
       >
         {/* Centered container for links and mega-menu alignment */}
-        <div className="max-w-7xl mx-auto px-8 md:px-16 flex justify-between items-center w-full relative">
+        <div className="max-w-7xl mx-auto px-4 md:px-16 flex md:justify-between items-center w-full relative">
           
-          {/* Logo (Left, flex-1) */}
-          <div className="flex-1 flex justify-start">
+          {/* Logo (Left) */}
+          <div className="flex-none md:flex-1 flex justify-start">
             <Link href="/" className="hover:opacity-80 transition-opacity flex items-center">
               <Image 
                 src="/logo.webp" 
                 alt="Seven9 Developers Logo" 
                 width={140} 
                 height={40} 
-                className={`object-contain transition-all duration-500 ${scrolled ? 'h-8 md:h-10' : 'h-10 md:h-12 brightness-0 invert'}`}
+                className={`w-auto object-contain transition-all duration-500 ${scrolled ? 'h-8 md:h-10' : 'h-10 md:h-12 brightness-0 invert'}`}
                 priority
               />
             </Link>
@@ -281,7 +281,7 @@ export default function Navbar() {
               transition={{ duration: 0.8, ease: easing }}
               className="fixed inset-y-0 right-0 w-full sm:w-[400px] bg-brand-sand z-[70] flex flex-col md:hidden shadow-2xl"
             >
-              <div className="flex justify-between items-center px-8 h-24 border-b border-brand-stone/30 flex-shrink-0">
+              <div className="flex justify-between items-center px-4 h-24 border-b border-brand-stone/30 flex-shrink-0">
                 <Link href="/" className="hover:opacity-80 transition-opacity" onClick={() => setMobileMenuOpen(false)}>
                   <Image src="/logo.webp" alt="Seven9 Logo" width={120} height={34} className="object-contain h-8 w-auto" />
                  </Link>
