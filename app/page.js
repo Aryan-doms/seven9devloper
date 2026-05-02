@@ -23,7 +23,7 @@ async function getPageData() {
 async function getProjects() {
     try {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100`,
+            `${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100&v=${Date.now()}`,
             { next: { revalidate: 60 } }
         )
         if (!res.ok) return []

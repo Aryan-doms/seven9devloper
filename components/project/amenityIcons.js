@@ -25,6 +25,7 @@ const amenityIcons = {
   job_application: '/amenities/job_application.svg',
   home_appliance: '/amenities/home-appliance.png',
   parking: '/amenities/parking.png',
+  Parking: '/amenities/parking.png',
   power_backup: '/amenities/power-backup.png',
 }
 export default amenityIcons

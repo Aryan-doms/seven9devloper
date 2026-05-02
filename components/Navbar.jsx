@@ -65,8 +65,8 @@ export default function Navbar() {
     async function fetchData() {
       try {
         const [projRes, pageRes] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100`),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/pages?slug=global-settings&_embed`)
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/projects?per_page=100&_t=${Date.now()}`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/wp-json/wp/v2/pages?slug=global-settings&_embed&_t=${Date.now()}`)
         ])
         
         if (projRes.ok) {
