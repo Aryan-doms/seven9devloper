@@ -108,12 +108,6 @@ export default async function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
         <div className="text-[10px] uppercase tracking-[0.2em] text-brand-primary/40 text-center md:text-left w-full flex flex-col md:flex-row justify-between gap-4">
           <span>© 2026 Seven9 Developers. All Rights Reserved.</span>
-          <a 
-            href="mailto:acpatel2005@gmail.com" 
-            className="hover:text-brand-clay transition-colors duration-300"
-          >
-            Site by Aryan Patel
-          </a>
         </div>
       </div>
     </footer>
