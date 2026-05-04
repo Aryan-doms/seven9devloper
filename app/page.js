@@ -120,6 +120,24 @@ export default async function Home() {
         }
     ];
 
+    // Sort projects by priority
+    const statusPriority = {
+        "New Launch": 1,
+        "Coming Soon": 2,
+        "Under Construction": 3,
+        "Completed": 4
+    };
+
+    const sortProjects = (projs) => {
+        return [...projs].sort((a, b) => {
+            const pA = statusPriority[a.status] || 99;
+            const pB = statusPriority[b.status] || 99;
+            return pA - pB;
+        });
+    }
+
+    const sortedProjects = sortProjects(dynamicProjects.length > 0 ? dynamicProjects : fallbackProjects);
+
     return (
         <main>
             <Hero
@@ -147,7 +165,7 @@ export default async function Home() {
             <ProjectsShowcase
                 data={{
                     title: acf?.projects_title || "Our Projects",
-                    projects: dynamicProjects.length > 0 ? dynamicProjects : fallbackProjects
+                    projects: sortedProjects
                 }}
             />
 

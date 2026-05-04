@@ -13,14 +13,33 @@ export default function Philosophy({ data }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="order-2 md:order-1 relative w-full aspect-square md:aspect-[4/5] bg-brand-stone/30"
+          className="order-2 md:order-1 relative w-full aspect-square md:aspect-[4/5] bg-brand-stone/30 rounded-sm overflow-hidden shadow-sm"
         >
           <Image 
             alt={image.alt} 
             fill 
-            className="object-cover rounded-sm shadow-sm" 
+            className="object-cover" 
             src={image.url} 
           />
+          {/* Option 1: Premium overlay with directors' names */}
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 flex justify-between items-end">
+            <div className="flex flex-col">
+              <span className="text-[10px] md:text-xs font-sans font-bold tracking-[0.25em] text-brand-sand uppercase leading-tight">
+                VISHAL PANCHAL
+              </span>
+              <span className="text-[8px] md:text-[9px] tracking-[0.15em] text-brand-sand/60 mt-1 uppercase font-light">
+                Director
+              </span>
+            </div>
+            <div className="flex flex-col items-end text-right">
+              <span className="text-[10px] md:text-xs font-sans font-bold tracking-[0.25em] text-brand-sand uppercase leading-tight">
+                AR. HARDIK PANCHAL
+              </span>
+              <span className="text-[8px] md:text-[9px] tracking-[0.15em] text-brand-sand/60 mt-1 uppercase font-light">
+                Managing Director
+              </span>
+            </div>
+          </div>
         </motion.div>
         
         <motion.div 
